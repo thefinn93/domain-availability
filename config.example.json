@@ -1,0 +1,6 @@
+{
+  "user": "ncuser",
+  "apikey": "nczpikey",
+  "domain": "api.sandbox.namecheap.com",
+  "tlds": "tldlist.json"
+}

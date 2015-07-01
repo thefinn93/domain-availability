@@ -25,3 +25,8 @@ build/Release
 # Dependency directory
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
+
+
+# Config file (example in config.example.json)
+config.json
+tldlist.json

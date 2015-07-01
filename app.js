@@ -2,11 +2,14 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
+var Q = require('q');
 
+var ncapi = require('./ncapi');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var check = require('./routes/check');
 
 var app = express();
 
@@ -19,11 +22,11 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/check', check);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,6 +58,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
