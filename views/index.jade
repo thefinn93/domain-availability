@@ -2,4 +2,9 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Enter a name to check it's availability
+  input(type="text", id="name")
+  
+
+block foot
+  script(src='/js/check.js', type='text/javascript')
