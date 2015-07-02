@@ -56,16 +56,16 @@ function TLDs(name) {
   return out;
 }
 
-function checkName() {
-  var names = TLDs("finn").join(",");
+function checkName(name) {
+  var names = TLDs(name).join(",");
   console.log("Checking", names);
   return ncapi('namecheap.domains.check', {'DomainList': names}).then(function(result) {
     return result;
   });
 }
 
-router.get('/', function(req, res, next) {
-  checkName().then(function(result) {
+router.get('/:name', function(req, res, next) {
+  checkName(req.params.name).then(function(result) {
     res.json(result);
   });
 });
