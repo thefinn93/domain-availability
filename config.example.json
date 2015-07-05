@@ -2,5 +2,7 @@
   "user": "ncuser",
   "apikey": "nczpikey",
   "domain": "api.sandbox.namecheap.com",
-  "tlds": "tldlist.json"
+  "tlds": "tldlist.json",
+  "port": 3000,
+  "host": "127.0.0.1"
 }
