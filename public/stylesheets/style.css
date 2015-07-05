@@ -1,8 +1,27 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  line-height: 3;
 }
 
 a {
   color: #00B7FF;
+}
+
+.tld {
+  border-radius: 5px;
+  margin: 12px;
+  padding: 5px;
+}
+
+.unknown {
+  background-color: #777;
+}
+
+.available {
+  background-color: #5cb85c;
+}
+
+.unavailable {
+  background-color: #d9534f;
 }

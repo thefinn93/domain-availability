@@ -2,71 +2,48 @@ var express = require('express');
 var router = express.Router();
 var config = require('../config.json');
 var ncapi = require('../ncapi');
-var fs = require('fs');
 var Q = require('q');
+var getTLDs = require('../TLDs');
 
 
-function updateTLDs() {
+function addTLDs(name) {
   var deferred = Q.defer();
-  var newTLDs = {
-    tlds: {}
-  };
-  ncapi("namecheap.domains.gettldlist").then(function(response) {
-    try {
-      response.ApiResponse.CommandResponse[0].Tlds[0].Tld.forEach(function(value) {
-        var tld = value.$;
-        tld.description = value._;
-        newTLDs.tlds[value.$.Name] = tld;
-      });
-      newTLDs.updated = new Date();
-      fs.writeFile(config.tlds, JSON.stringify(newTLDs), function(err) {
-        if(err) {
-          console.log(err);
-        } else {
-          console.log('wrote file');
-        }
-        deferred.resolve(newTLDs.tlds);
-      });
-    } catch(e) {
-      console.log(e.stack);
+  getTLDs().then(function(TLDs) {
+    var out = [];
+    for(var tld in TLDs) {
+      if(TLDs.hasOwnProperty(tld)) {
+        out.push(name + '.' + tld);
+      }
     }
+    deferred.resolve(out.join(","));
+  }).catch(function(err) {
+    deferred.reject(err);
   });
   return deferred.promise;
 }
 
-var tlds = {};
-
-console.log('Trying to load', config.tlds);
-if(fs.existsSync(config.tlds)) {
-  tlds = require('../' + config.tlds).tlds;
-} else {
-  console.log(config.tlds, 'does not exist?');
-  updateTLDs().then(function(newTLDs) {
-    tlds = newTLDs;
-  });
-}
-
-function TLDs(name) {
-  var out = [];
-  for(var tld in tlds) {
-    if(tlds.hasOwnProperty(tld)) {
-      out.push(name + '.' + tld);
-    }
-  }
-  return out;
-}
-
 function checkName(name) {
-  var names = TLDs(name).join(",");
-  console.log("Checking", names);
-  return ncapi('namecheap.domains.check', {'DomainList': names}).then(function(result) {
-    return result;
+  var deferred = Q.defer();
+  addTLDs(name).then(function(names) {
+    console.log("Checking", names);
+    ncapi('namecheap.domains.check', {'DomainList': names}).then(function(result) {
+      deferred.resolve(result);
+    }).catch(function(err) {
+      console.log(err.stack || err);
+      deferred.reject(err);
+    });
+  }).catch(function(err) {
+    console.log(err.stack || err);
+    deferred.reject(err);
   });
+  return deferred.promise;
 }
 
 router.get('/:name', function(req, res, next) {
   checkName(req.params.name).then(function(result) {
     res.json(result);
+  }).catch(function(err) {
+    next(err);
   });
 });
 
