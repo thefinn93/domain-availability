@@ -12,8 +12,14 @@ function checkNames(names) {
           }
         }
 
+        var aff = "";
+
+        if(NCaffiliateID) {
+          aff = "&aff=" + NCaffiliateID;
+        }
+
         var link = $("<a>")
-          .attr('href', 'https://www.namecheap.com/domains/registration/results.aspx?domain=' + result.$.Domain)
+          .attr('href', 'https://www.namecheap.com/domains/registration/results.aspx?domain=' + result.$.Domain + aff)
           .attr('target', '_blank')
           .text(result.$.Domain);
         var box = $("." + TLD).html(link);

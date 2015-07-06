@@ -9,5 +9,6 @@
   "proxies": [
     "127.0.0.1"
   ],
-  "realIPheader": "X-Forwarded-For"
+  "realIPheader": "X-Forwarded-For",
+  "NCaffiliateID": 80599
 }
