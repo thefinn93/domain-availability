@@ -22,6 +22,8 @@ function checkNames(names) {
         } else {
           console.log("whut", result);
         }
+        completed++;
+        updateStatus();
       });
     } else {
       console.error("data.ApiResponse.CommandResponse[0].DomainCheckResult is undefined", data);
@@ -29,6 +31,10 @@ function checkNames(names) {
     deferred.resolve();
   });
   return deferred.promise;
+}
+
+function updateStatus() {
+  $(".status").text(completed + "/" + tlds.length);
 }
 
 function runBatches() {
@@ -44,17 +50,23 @@ function runBatches() {
     }
     batchesToCheck.push(names);
   }
+  $(".throbber").addClass("three-quarters-loader");
   var next = Q();
+  window.completed = 0;
+  updateStatus();
   batchesToCheck.forEach(function(batch) {
     next = next.then(function() {
-      console.log(batch);
       return checkNames(batch);
     });
+  });
+  next.then(function() {
+    $(".throbber").removeClass("three-quarters-loader");
   });
   return false;
 }
 
 $(document).ready(function() {
+  $("#name").focus();
   window.tlds = [];
   $.get('/tlds', function(tldlist) {
     for(var tld in tldlist) {

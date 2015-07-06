@@ -8,6 +8,15 @@ a {
   color: #00B7FF;
 }
 
+input[type=text] {
+  height: 32px;
+}
+
+.throbber {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
 .tld {
   border-radius: 5px;
   margin: 12px;
