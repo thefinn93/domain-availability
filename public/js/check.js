@@ -12,21 +12,21 @@ function checkNames(names) {
           }
         }
 
-        var aff = "";
-
-        if(NCaffiliateID) {
-          aff = "&aff=" + NCaffiliateID;
-        }
-
-        var link = $("<a>")
-          .attr('href', 'https://www.namecheap.com/domains/registration/results.aspx?domain=' + result.$.Domain + aff)
-          .attr('target', '_blank')
-          .text(result.$.Domain);
-        var box = $("." + TLD).html(link);
+        var box = $("." + TLD);
         if(result.$.Available == "true") {
-          box.removeClass("unknown").addClass("available");
+          box.removeClass("unknown").addClass("available").html(
+            $("<a>")
+              .attr('href', 'https://www.namecheap.com/domains/registration/results.aspx?domain=' + result.$.Domain + aff)
+              .attr('target', '_blank')
+              .text(result.$.Domain)
+          );
         } else if(result.$.Available == "false") {
-          box.removeClass("unknown").addClass("unavailable");
+          box.removeClass("unknown").addClass("unavailable").html(
+            $("<a>")
+              .attr('href', 'http://' + result.$.Domain)
+              .attr('target', '_blank')
+              .text(result.$.Domain)
+          );
         } else {
           console.log("whut", result);
         }
@@ -92,6 +92,7 @@ $(document).ready(function() {
   $("#name").focus();
   window.tlds = [];
   $.get('/tlds', function(tldlist) {
+    window.tldData = tldlist;
     for(var tld in tldlist) {
       if(tldlist.hasOwnProperty(tld)) {
         var box = $("<span>")
