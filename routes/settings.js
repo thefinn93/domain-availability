@@ -16,7 +16,7 @@ router.get('', function(req, res, next) {
   }
 
   if(config.NCaffiliateID) {
-    out.push("var aff = " + config.NCaffiliateID + ";");
+    out.push("var aff = \"&aff=" + config.NCaffiliateID + "\";");
   } else {
     out.push("var aff = \"\";");
   }
