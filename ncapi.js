@@ -5,10 +5,13 @@ var request = require('request');
 var querystring = require('querystring');
 xml2js = require('xml2js');
 
-module.exports = function ncapi(command, args) {
+module.exports = function ncapi(command) {
   var deferred = Q.defer();
-  if(args === undefined) {
-    args = {};
+  var args = {};
+  if(typeof(command) == "string") {
+    args.Command = command;
+  } else {
+    args = command;
   }
   args.ApiUser = config.user;
   args.ApiKey = config.apikey;
@@ -18,7 +21,6 @@ module.exports = function ncapi(command, args) {
   if(args.ClientIP === undefined) {
     args.ClientIP = "127.0.0.1";
   }
-  args.Command = command;
 
   var URL = "https://" + config.domain + "/xml.response?" + querystring.stringify(args);
 
