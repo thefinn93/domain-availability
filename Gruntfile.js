@@ -12,6 +12,10 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'node_modules/raven-js/dist/',
             src: ['raven.min.js', 'raven.min.map', 'raven.js'], dest: 'public/vendor/raven-js/'
+          },
+          {
+            expand: true, cwd: 'node_modules/q',
+            src: ['q.js'], dest: 'public/vendor/q/'
           }
         ]
       }

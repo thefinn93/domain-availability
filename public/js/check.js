@@ -1,4 +1,5 @@
 function checkNames(names) {
+  var deferred = Q.defer();
   $.get('/check/' + names.join(","), function(data) {
     if(data.ApiResponse.CommandResponse[0].DomainCheckResult !== undefined) {
       data.ApiResponse.CommandResponse[0].DomainCheckResult.forEach(function(result) {
@@ -25,7 +26,9 @@ function checkNames(names) {
     } else {
       console.error("data.ApiResponse.CommandResponse[0].DomainCheckResult is undefined", data);
     }
+    deferred.resolve();
   });
+  return deferred.promise;
 }
 $(document).ready(function() {
   var tlds = [];
@@ -44,13 +47,21 @@ $(document).ready(function() {
   });
   $('#name').on('blur', function(evt) {
     var name = evt.currentTarget.value;
+    var batchesToCheck = [];
     for(var i = 0; i < tlds.length; i++) {
       var names = [];
       for(var j = 0; j + i < tlds.length && j < 10; j++) {
         var domain = name + "." + tlds[i + j];
         names.push(domain);
       }
-      checkNames(names);
+      batchesToCheck.push(names);
     }
+    var next = Q();
+    batchesToCheck.forEach(function(batch) {
+      next = next.then(function() {
+        console.log(batch);
+        return checkNames(batch);
+      });
+    });
   });
 });
