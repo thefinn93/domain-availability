@@ -10,5 +10,9 @@
     "127.0.0.1"
   ],
   "realIPheader": "X-Forwarded-For",
-  "NCaffiliateID": 80599
+  "NCaffiliateID": 80599,
+  "piwik": {
+    "uri": "https://piwik.you.tld",
+    "site": 1
+  }
 }
