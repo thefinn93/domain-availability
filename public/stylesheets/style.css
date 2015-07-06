@@ -12,6 +12,13 @@ input[type=text] {
   height: 32px;
 }
 
+.ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
 .throbber {
   margin-left: 20px;
   margin-right: 10px;
