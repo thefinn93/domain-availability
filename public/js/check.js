@@ -45,7 +45,7 @@ $(document).ready(function() {
     for(var i = 0; i < tlds.length; i++) {
       var names = [];
       for(var j = 0; j + i < tlds.length && j-10 < i; j++) {
-        names.push[i + j];
+        names.push(name + "." + tlds[i + j]);
       }
       checkNames(names);
     }
