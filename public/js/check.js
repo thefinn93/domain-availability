@@ -14,7 +14,11 @@ function checkNames(names) {
 
         console.log(result.$.Domain, "TLD:", TLD);
 
-        var box = $("." + TLD).text(result.$.Domain);
+        var link = $("<a>")
+          .attr('href', 'https://www.namecheap.com/domains/registration/results.aspx?domain=' + result.$.Domain)
+          .attr('target', '_blank')
+          .text(result.$.Domain);
+        var box = $("." + TLD).html(link);
         if(result.$.Available == "true") {
           box.removeClass("unknown").addClass("available");
         } else if(result.$.Available == "false") {
