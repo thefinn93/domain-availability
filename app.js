@@ -5,6 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var Q = require('q');
+var raven = require('raven');
 
 var ncapi = require('./ncapi');
 var routes = require('./routes/index');
@@ -14,7 +15,12 @@ var tlds = require('./routes/tlds');
 var pull = require('./routes/pull');
 var ravenloader = require('./routes/ravenloader');
 
+var config = require('./config.json');
+
 var app = express();
+
+app.use(raven.middleware.express.requestHandler(config.dsn));
+app.use(raven.middleware.express.errorHandler(config.dsn));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
