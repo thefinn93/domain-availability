@@ -49,6 +49,10 @@ function runBatches() {
   var batchsize = 10;
   var name = $("#name").val();
   window.location.hash = name;
+
+  if(window._paq) {
+    _paq.push(["trackSiteSearch", name]);
+  }
   var batchesToCheck = [];
   for(var i = 0; i < tlds.length; i += batchsize) {
     var names = [];
