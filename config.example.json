@@ -4,5 +4,10 @@
   "domain": "api.sandbox.namecheap.com",
   "tlds": "tldlist.json",
   "port": 3000,
-  "host": "127.0.0.1"
+  "host": "0.0.0.0",
+  "dsn": "https://asdifaslkdf@getsentry.com/whatevetr/1243",
+  "proxies": [
+    "127.0.0.1"
+  ],
+  "realIPheader": "X-Forwarded-For"
 }
