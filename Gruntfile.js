@@ -8,6 +8,10 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'node_modules/jquery/dist/',
             src: ['jquery.min.js', 'jquery.min.map'], dest: 'public/vendor/jquery/'
+          },
+          {
+            expand: true, cwd: 'node_modules/raven-js/diest/',
+            src:['raven.min.js', 'raven.min.map', 'raven.js'], dest: 'public/vendor/raven-js/'
           }
         ]
       }
