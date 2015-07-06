@@ -32,12 +32,13 @@ function checkNames(names) {
 }
 
 function runBatches() {
+  var batchsize = 10;
   var name = $("#name").val();
   window.location.hash = name;
   var batchesToCheck = [];
-  for(var i = 0; i < tlds.length; i++) {
+  for(var i = 0; i < tlds.length; i += batchsize) {
     var names = [];
-    for(var j = 0; j + i < tlds.length && j < 10; j++) {
+    for(var j = 0; j + i < tlds.length && j < batchsize; j++) {
       var domain = name + "." + tlds[i + j];
       names.push(domain);
     }
