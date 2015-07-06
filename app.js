@@ -38,7 +38,7 @@ app.use('/users', users);
 app.use('/check', check);
 app.use('/tlds', tlds);
 app.use('/pull', pull);
-app.use('/ravenloader', ravenloader);
+app.use('/ravenloader.js', ravenloader);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

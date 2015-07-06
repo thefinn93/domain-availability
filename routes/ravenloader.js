@@ -3,7 +3,7 @@ var router = express.Router();
 var exec = require('child_process').exec;
 var config = require('../config');
 
-router.get('/', function(req, res, next) {
+router.get('', function(req, res, next) {
   if(config.dsn) {
     exec('git rev-parse HEAD', function(err, stdout, stderr) {
       var ravenconfig = {};
