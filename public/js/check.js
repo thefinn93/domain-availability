@@ -12,8 +12,6 @@ function checkNames(names) {
           }
         }
 
-        console.log(result.$.Domain, "TLD:", TLD);
-
         var link = $("<a>")
           .attr('href', 'https://www.namecheap.com/domains/registration/results.aspx?domain=' + result.$.Domain)
           .attr('target', '_blank')
@@ -54,6 +52,9 @@ function runBatches() {
     }
     batchesToCheck.push(names);
   }
+
+  reset();
+
   $(".throbber").addClass("three-quarters-loader");
   var next = Q();
   window.completed = 0;
@@ -69,6 +70,18 @@ function runBatches() {
   return false;
 }
 
+function reset() {
+  for(var tld in tlds) {
+    if(tlds.hasOwnProperty(tld)) {
+      $("." + tlds[tld].replace(/\./g, '-'))
+        .removeClass("unavailable")
+        .removeClass("available")
+        .addClass("unknown")
+        .text("." + tlds[tld]);
+    }
+  }
+}
+
 $(document).ready(function() {
   $("#name").focus();
   window.tlds = [];
@@ -79,7 +92,7 @@ $(document).ready(function() {
           .addClass('tld')
           .addClass('unknown')
           .addClass(tld.replace(/\./g, '-'))
-          .html('<b>.' + tld + '</b>');
+          .html('.' + tld);
         $(".results").append(" ").append(box);
         tlds.push(tld);
       }
