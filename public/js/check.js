@@ -100,7 +100,10 @@ $(document).ready(function() {
           .addClass('unknown')
           .addClass(tld.replace(/\./g, '-'))
           .html('.' + tld);
-        if(prioritize && prioritize.indexOf(tld) > -1) {
+        if(prioritize === undefined) {
+          window.prioritize = [];
+        }
+        if(prioritize.indexOf(tld) > -1) {
           $(".results").prepend(box).prepend(" ");
           tlds.unshift(tld);
         } else {
