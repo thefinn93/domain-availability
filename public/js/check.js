@@ -100,8 +100,13 @@ $(document).ready(function() {
           .addClass('unknown')
           .addClass(tld.replace(/\./g, '-'))
           .html('.' + tld);
-        $(".results").append(" ").append(box);
-        tlds.push(tld);
+        if(prioritize && prioritize.indexOf(tld) > -1) {
+          $(".results").prepend(box).prepend(" ");
+          tlds.unshift(tld);
+        } else {
+          $(".results").append(" ").append(box);
+          tlds.push(tld);
+        }
       }
     }
     if(window.location.hash) {

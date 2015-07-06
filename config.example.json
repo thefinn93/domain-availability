@@ -14,5 +14,11 @@
   "piwik": {
     "uri": "https://piwik.you.tld",
     "site": 1
-  }
+  },
+  "prioritize": [
+    "com",
+    "net",
+    "org",
+    "me"
+  ]
 }
