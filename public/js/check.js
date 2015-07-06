@@ -30,8 +30,31 @@ function checkNames(names) {
   });
   return deferred.promise;
 }
+
+function runBatches() {
+  var name = $("#name").val();
+  window.location.hash = name;
+  var batchesToCheck = [];
+  for(var i = 0; i < tlds.length; i++) {
+    var names = [];
+    for(var j = 0; j + i < tlds.length && j < 10; j++) {
+      var domain = name + "." + tlds[i + j];
+      names.push(domain);
+    }
+    batchesToCheck.push(names);
+  }
+  var next = Q();
+  batchesToCheck.forEach(function(batch) {
+    next = next.then(function() {
+      console.log(batch);
+      return checkNames(batch);
+    });
+  });
+  return false;
+}
+
 $(document).ready(function() {
-  var tlds = [];
+  window.tlds = [];
   $.get('/tlds', function(tldlist) {
     for(var tld in tldlist) {
       if(tldlist.hasOwnProperty(tld)) {
@@ -44,24 +67,10 @@ $(document).ready(function() {
         tlds.push(tld);
       }
     }
-  });
-  $('#name').on('blur', function(evt) {
-    var name = evt.currentTarget.value;
-    var batchesToCheck = [];
-    for(var i = 0; i < tlds.length; i++) {
-      var names = [];
-      for(var j = 0; j + i < tlds.length && j < 10; j++) {
-        var domain = name + "." + tlds[i + j];
-        names.push(domain);
-      }
-      batchesToCheck.push(names);
+    if(window.location.hash) {
+      $("#name").val(window.location.hash.split("#")[1]);
+      runBatches();
     }
-    var next = Q();
-    batchesToCheck.forEach(function(batch) {
-      next = next.then(function() {
-        console.log(batch);
-        return checkNames(batch);
-      });
-    });
   });
+  $('#checkerform').on('submit', runBatches);
 });
