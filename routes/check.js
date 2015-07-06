@@ -13,7 +13,7 @@ function getClientIP(req) {
   if(config.realIPheader) {
     header = config.realIPheader;
   }
-  if(proxies.indexOf(req.connection.remoteAddress) != -1) {
+  if(trustedProxies.indexOf(req.connection.remoteAddress) != -1) {
     clientIP = req.headers[header] || req.connection.remoteAddress;
   }
   return clientIP;
