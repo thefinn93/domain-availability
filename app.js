@@ -13,6 +13,7 @@ var users = require('./routes/users');
 var check = require('./routes/check');
 var tlds = require('./routes/tlds');
 var pull = require('./routes/pull');
+var stats = require('./routes/stats');
 var settings = require('./routes/settings');
 
 var config = require('./config.json');
@@ -38,6 +39,7 @@ app.use('/check', check);
 app.use('/tlds', tlds);
 app.use('/pull', pull);
 app.use('/settings.js', settings);
+app.use('/stats', stats);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

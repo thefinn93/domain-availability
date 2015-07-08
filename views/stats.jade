@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p Some stats about the queries being run
+  canvas.results(height=500, width=500)
+
+block foot
+  script(src='/stats/stats.js', type='text/javascript')
+  script(src='/js/stats.js', type='text/javascript')
+  script(src='/vendor/chart.js/Chart.min.js', type='text/javascript')

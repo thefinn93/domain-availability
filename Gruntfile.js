@@ -16,6 +16,10 @@ module.exports = function(grunt) {
           {
             expand: true, cwd: 'node_modules/q',
             src: ['q.js'], dest: 'public/vendor/q/'
+          },
+          {
+            expand: true, cwd: 'node_modules/chart.js/',
+            src: ['Chart.min.js'], dest: 'public/vendor/chart.js/'
           }
         ]
       }
@@ -25,6 +29,10 @@ module.exports = function(grunt) {
          files: ['**.js'],
          tasks: ['jshint']
       },
+      gruntFile: {
+        files: ['Gruntfile.js'],
+        tasks: ['copy', 'jshint']
+      }
     },
     jshint: {
       files: ['**.js']
