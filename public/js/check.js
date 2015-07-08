@@ -46,7 +46,7 @@ function updateStatus() {
 }
 
 function runBatches() {
-  var batchsize = 10;
+  var batchsize = window.batchsize || 20;
   var name = $("#name").val();
   window.location.hash = name;
 
