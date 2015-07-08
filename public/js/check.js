@@ -42,11 +42,12 @@ function checkNames(names) {
 }
 
 function updateStatus() {
-  $(".status").text(completed + "/" + tlds.length);
+  $(".status").text(completed + "/" + tlds.length + " (" + currentbatchsize + ")");
 }
 
 function runBatches() {
   var batchsize = window.batchsize || (Math.round(Math.random() * 49) + 1);
+  window.currentbatchsize = batchsize;
   console.debug('batch size is', batchsize);
   var name = $("#name").val();
   window.location.hash = name;
