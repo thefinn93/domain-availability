@@ -46,7 +46,8 @@ function updateStatus() {
 }
 
 function runBatches() {
-  var batchsize = window.batchsize || 20;
+  var batchsize = window.batchsize || (Math.round(Math.random() * 49) + 1);
+  console.debug('batch size is', batchsize);
   var name = $("#name").val();
   window.location.hash = name;
 
