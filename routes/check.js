@@ -23,7 +23,7 @@ function getClientIP(req) {
 function recordTime(start, recordCount) {
   var time = (new Date()) - start;
   if(config.stats) {
-    fs.appendFile(config.stats, recordCount + "," + time, function(err) {
+    fs.appendFile(config.stats, recordCount + "," + time + "\n", function(err) {
       if(err) {
         console.log(err.stack || err);
       }
