@@ -20,5 +20,6 @@
     "net",
     "org",
     "me"
-  ]
+  ],
+  "stats": "stats.csv"
 }

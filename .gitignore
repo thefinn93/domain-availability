@@ -31,3 +31,6 @@ public/vendor
 # Config file (example in config.example.json)
 config.json
 tldlist.json
+
+# Stats collection
+stats.csv
