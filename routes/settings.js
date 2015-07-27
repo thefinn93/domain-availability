@@ -11,7 +11,7 @@ router.get('', function(req, res, next) {
       if(!err) {
         ravenconfig.release = stdout;
       }
-      out.push("Raven.config('" + config.dsn + "', " + JSON.stringify(ravenconfig) + ").install();");
+      out.push("Raven.config('" + config.dsn.public + "', " + JSON.stringify(ravenconfig) + ").install();");
     });
   }
 

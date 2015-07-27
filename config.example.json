@@ -5,7 +5,10 @@
   "tlds": "tldlist.json",
   "port": 3000,
   "host": "0.0.0.0",
-  "dsn": "https://asdifaslkdf@getsentry.com/whatevetr/1243",
+  "dsn": {
+    "public": "https://asdifaslkdf@getsentry.com/whatevetr/1243",
+    "private": "https://asdifaslkdf@getsentry.com/whatevetr/1243"
+  },
   "proxies": [
     "127.0.0.1"
   ],

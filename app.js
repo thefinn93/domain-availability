@@ -20,8 +20,10 @@ var config = require('./config.json');
 
 var app = express();
 
-app.use(raven.middleware.express.requestHandler(config.dsn));
-app.use(raven.middleware.express.errorHandler(config.dsn));
+if(config.dsn) {
+  app.use(raven.middleware.express.requestHandler(config.dsn.private));
+  app.use(raven.middleware.express.errorHandler(config.dsn.private));
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
