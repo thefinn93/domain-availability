@@ -1,7 +1,7 @@
 function checkNames(names) {
   var deferred = Q.defer();
   $.get('/check/' + names.join(","), function(data) {
-    if(data.ApiResponse.CommandResponse[0].DomainCheckResult !== undefined) {
+    if(data.ApiResponse.CommandResponse && data.ApiResponse.CommandResponse[0].DomainCheckResult !== undefined) {
       data.ApiResponse.CommandResponse[0].DomainCheckResult.forEach(function(result) {
         var splitbydots = result.$.Domain.split(".");
         var name = splitbydots[0];
