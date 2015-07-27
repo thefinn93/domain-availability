@@ -1,18 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var exec = require('child_process').exec;
-var config = require('../config');
+var config = require('../config.json');
 
 router.get('', function(req, res, next) {
   var out = [];
   if(config.dsn) {
-    exec('git rev-parse HEAD', function(err, stdout, stderr) {
-      var ravenconfig = {};
-      if(!err) {
-        ravenconfig.release = stdout;
-      }
-      out.push("Raven.config('" + config.dsn.public + "', " + JSON.stringify(ravenconfig) + ").install();");
-    });
+    out.push("Raven.config('" + config.dsn.public + "').install();");
+  } else {
+    console.log(config);
   }
 
   if(config.NCaffiliateID) {
