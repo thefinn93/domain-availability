@@ -3,6 +3,8 @@ var router = express.Router();
 var ncapi = require('../ncapi');
 var config = require('../config.json');
 var fs = require('fs');
+var raven = require('raven');
+var sentry = new raven.Client(config.dsn);
 
 function getClientIP(req) {
   var clientIP = req.connection.remoteAddress || '127.0.0.1';
@@ -36,6 +38,17 @@ router.get('/:names', function(req, res, next) {
   var count = req.params.names.split(",").length;
   ncapi({Command: 'namecheap.domains.check', DomainList: req.params.names, ClientIP: getClientIP(req)}).then(function(result) {
     recordTime(start, count);
+    try {
+      result.ApiResponse.Errors.forEach(function(error) {
+        if(error !== "") {
+          console.log(error.Error[0]);
+          sentry.captureMessage(JSON.stringify(error.Error[0]._, {extra: error.Error[0].$}));
+        }
+      });
+    } catch(e) {
+      console.log(e.stack || e);
+      sentry.captureMessage(e);
+    }
     res.json(result);
   }).catch(function(err) {
     next(err);
