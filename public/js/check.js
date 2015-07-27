@@ -29,12 +29,14 @@ function checkNames(names) {
           );
         } else {
           console.log("whut", result);
+
         }
         completed++;
         updateStatus();
       });
     } else {
       console.error("data.ApiResponse.CommandResponse[0].DomainCheckResult is undefined", data);
+      Raven.captureMessage("data.ApiResponse.CommandResponse[0].DomainCheckResult", {extra: data});
     }
     deferred.resolve();
   });
