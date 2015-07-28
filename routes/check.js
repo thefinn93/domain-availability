@@ -28,6 +28,7 @@ function recordTime(start, recordCount) {
     fs.appendFile(config.stats, recordCount + "," + time + "\n", function(err) {
       if(err) {
         console.log(err.stack || err);
+        sentry.captureError(err);
       }
     });
   }
@@ -47,7 +48,7 @@ router.get('/:names', function(req, res, next) {
       });
     } catch(e) {
       console.log(e.stack || e);
-      sentry.captureMessage(e);
+      sentry.captureError(e);
     }
     res.json(result);
   }).catch(function(err) {

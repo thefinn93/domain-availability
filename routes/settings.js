@@ -7,8 +7,6 @@ router.get('', function(req, res, next) {
   var out = [];
   if(config.dsn) {
     out.push("Raven.config('" + config.dsn.public + "').install();");
-  } else {
-    console.log("Raven not configured");
   }
 
   if(config.NCaffiliateID) {
