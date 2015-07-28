@@ -5,9 +5,11 @@ var config = require('../config.json');
 
 router.get('', function(req, res, next) {
   var out = [];
+  var dsn = "undefined";
   if(config.dsn) {
-    out.push("Raven.config('" + config.dsn.public + "').install();");
+    dsn = config.dsn.public
   }
+  out.push("Raven.config('" + dsn + "').install();");
 
   if(config.NCaffiliateID) {
     out.push("var aff = \"&aff=" + config.NCaffiliateID + "\";");
