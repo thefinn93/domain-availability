@@ -29,7 +29,7 @@ function checkNames(names) {
           );
         } else {
           console.log("whut", result);
-
+          Raven.captureMessage("Got unexpected results", {extra: results});
         }
         completed++;
         updateStatus();
