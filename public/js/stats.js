@@ -23,7 +23,7 @@ $(document).ready(function() {
   for(var i = 0; i < stats.length; i++) {
     if(stats[i] !== undefined) {
       keys.push(i);
-      values.push(avg(stats[i]));
+      values.push(avg(stats[i])/i);
       console.log(i, stats[i]);
     }
   }
