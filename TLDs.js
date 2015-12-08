@@ -43,3 +43,5 @@ module.exports = function() {
   }
   return deferred.promise;
 };
+
+setInterval(updateTLDs, 24*60*60*1000); // Update the TLD list every 24 hours
