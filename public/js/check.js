@@ -48,7 +48,7 @@ function updateStatus() {
 }
 
 function runBatches() {
-  var batchsize = window.batchsize || (Math.round(Math.random() * 49) + 1);
+  var batchsize = window.batchsize || (Math.round(Math.random() * 49) + 20);
   window.currentbatchsize = batchsize;
   console.debug('batch size is', batchsize);
   var name = $("#name").val();
