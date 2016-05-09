@@ -16,7 +16,7 @@
     "raven": "^0.8.1",
     "raven-js": "^3.0.3",
     "request": "^2.58.0",
-    "serve-favicon": "~2.2.1",
+    "serve-favicon": "~2.3.0",
     "xml2js": "^0.4.9"
   },
   "devDependencies": {
