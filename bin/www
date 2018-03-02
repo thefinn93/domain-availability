@@ -7,7 +7,11 @@
 var app = require('../app');
 var debug = require('debug')('domain-availability:server');
 var http = require('http');
-var config = require(process.env.CONFIG || '../config.json');
+var configfile = process.env.CONFIG || '../config.json'
+
+console.log('Loading config from ' + configfile)
+
+var config = require(configfile);
 
 /**
  * Get port from environment and store in Express.
