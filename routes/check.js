@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var ncapi = require('../ncapi');
-var config = require('../config.json');
+var config = require('../confighandler');
 var fs = require('fs');
 var raven = require('raven');
 var sentry = new raven.Client(config.dsn);

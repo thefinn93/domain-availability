@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var config = require('./config.json');
+var config = require('./confighandler');
 var ncapi = require('./ncapi');
 var fs = require('fs');
 var Q = require('q');

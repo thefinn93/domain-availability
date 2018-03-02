@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var exec = require('child_process').exec;
-var config = require('../config.json');
+var config = require('../confighandler');
 
 router.get('', function(req, res, next) {
   var out = [];

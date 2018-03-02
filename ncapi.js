@@ -1,5 +1,5 @@
 var https = require('https');
-var config = require('./config.json');
+var config = require('./confighandler');
 var Q = require('q');
 var request = require('request');
 var querystring = require('querystring');

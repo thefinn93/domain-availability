@@ -16,7 +16,7 @@ var pull = require('./routes/pull');
 var stats = require('./routes/stats');
 var settings = require('./routes/settings');
 
-var config = require('./config.json');
+var config = require('./confighandler');
 
 var app = express();
 
