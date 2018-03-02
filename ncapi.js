@@ -3,6 +3,8 @@ var config = require('./confighandler');
 var Q = require('q');
 var request = require('request');
 var querystring = require('querystring');
+var debug = require('debug')('domain-availability:ncapi');
+
 xml2js = require('xml2js');
 
 module.exports = function ncapi(command) {
@@ -23,6 +25,7 @@ module.exports = function ncapi(command) {
   }
 
   var URL = "https://" + config.domain + "/xml.response?" + querystring.stringify(args);
+  debug(URL);
 
   var parser = new xml2js.Parser();
   request(URL, function (error, response, body) {

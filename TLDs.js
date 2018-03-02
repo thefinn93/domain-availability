@@ -4,6 +4,7 @@ var config = require('./confighandler');
 var ncapi = require('./ncapi');
 var fs = require('fs');
 var Q = require('q');
+var debug = require('debug')('domain-availability:TLDs');
 
 
 function updateTLDs() {
@@ -11,6 +12,7 @@ function updateTLDs() {
   var newTLDs = {
     tlds: {}
   };
+  debug('Updating TLD list...');
   ncapi("namecheap.domains.gettldlist").then(function(response) {
     try {
       response.ApiResponse.CommandResponse[0].Tlds[0].Tld.forEach(function(value) {
@@ -23,7 +25,7 @@ function updateTLDs() {
         if(err) {
           console.log(err);
         } else {
-          console.log('wrote file');
+          debug('Successfully downloaded TLD list');
         }
         deferred.resolve(newTLDs.tlds);
       });
