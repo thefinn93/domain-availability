@@ -23,14 +23,14 @@ function updateTLDs() {
       newTLDs.updated = new Date();
       fs.writeFile(config.tlds, JSON.stringify(newTLDs), function(err) {
         if(err) {
-          console.log(err);
+          debug(err);
         } else {
           debug('Successfully downloaded TLD list');
         }
         deferred.resolve(newTLDs.tlds);
       });
     } catch(e) {
-      console.log(e.stack);
+      debug(e.stack);
     }
   });
   return deferred.promise;
