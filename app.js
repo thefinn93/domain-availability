@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var Q = require('q');
 var raven = require('raven');
+var debug = require('debug')('domain-availability:app');
 
 var ncapi = require('./ncapi');
 var routes = require('./routes/index');
@@ -21,6 +22,7 @@ var config = require('./confighandler');
 var app = express();
 
 if(config.dsn) {
+  debug("Configuring sentry DSN", config.dsn);
   app.use(raven.middleware.express.requestHandler(config.dsn.private));
   app.use(raven.middleware.express.errorHandler(config.dsn.private));
 }
